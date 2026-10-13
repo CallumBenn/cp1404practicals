@@ -2,6 +2,7 @@
 CP1404/CP5632 - Practical 04
 Callum Bennett
 """
+
 # Basic list operations
 NUMBER_OF_PROMPTS = 5
 
