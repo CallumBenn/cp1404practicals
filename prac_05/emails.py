@@ -3,35 +3,41 @@ CP1404/CP5632 - Practical 05
 Callum Bennett
 
 Emails
-Estimate: 30 minutes
-Actual: xx minutes
+Estimate: 40 minutes
+Actual: 70 minutes
 """
+from typing import Any
 
-# ALPHANUMERIC_CHARACTERS = "abcdefghijklmnopoqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
-emails_and_names = {}
-# name = []
-# email = input("Email: ")
-email = "lindsay.ward@jcu.edu.au"
-# unformatted_name = email.split("@", 1)[0].split(".")
-# name = email.split("@", 1)[0].split(".")
-name = " ".join(email.split("@", 1)[0].split(".")).title()
-# for character in unformatted_name:
-#     if character not in ALPHANUMERIC_CHARACTERS:
-#         character = " "
-#     name += character
-print(name)                 # DELETE THIS
-emails_and_names[email] = name
-
-choice = input(f"Is your name {name}? (Y/n)").upper()
-while choice != "Y":
+def main():
+    emails_and_names = {}
     email = input("Email: ")
-    name = email.split("@", 1)[0].split(".")
-    choice = input(f"Is your name {name}? (Y/n)").upper()
-    emails_and_names[email] = name
+    emails_and_names[email] = determine_name(email)
 
-for i in emails_and_names:
-    print(emails_and_names[i], i)
+    choice = input(f"Is your name {emails_and_names[email]}? (Y/n) ").upper()
+    while choice == "Y" or choice == "":
+        email = input("Email: ")
+        emails_and_names[email] = determine_name(email)
+        choice = input(f"Is your name {emails_and_names[email]}? (Y/n) ").upper()
+
+    name = input("Name: ")
+    if name != "":
+        emails_and_names[email] = determine_name(name)
+    email = input("Email: ")
+    if email != "":
+        emails_and_names[email] = determine_name(name)
+    print_emails(emails_and_names)
+
+
+def determine_name(item):
+    name = " ".join(item.split("@", 1)[0].split(".")).title()
+    return name
+
+
+def print_emails(emails):
+    for i in emails:
+        print(f"{emails[i]} ({i})")
 
 
 
+main()
