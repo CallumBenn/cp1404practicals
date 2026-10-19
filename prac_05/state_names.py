@@ -6,7 +6,8 @@ File needs reformatting
 
 STATE_NAMES = {"QLD": "Queensland", "NSW": "New South Wales", "NT": "Northern Territory", "WA": "Western Australia",
                 "ACT": "Australian Capital Territory", "VIC": "Victoria", "TAS": "Tasmania", "SA": "South Australia"}
-print(STATE_NAMES)
+for state_code in STATE_NAMES:
+    print(f"{state_code:3} is {STATE_NAMES[state_code]}")
 
 state_code = input("Enter short state: ").upper()
 while state_code != "":
