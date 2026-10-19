@@ -6,17 +6,15 @@ from idlelib.autocomplete_w import KEYRELEASE_SEQUENCE
 
 COLOUR_CODES = {"AbsoluteZero": "#0048ba", "AcidGreen": "#b0bf1a", "AliceBlue": "#f0f8ff", "AlizarinCrimson": "#e32636",
                 "AntiqueWhite": "#faebd7", "ArmyGreen": "#4b5320", "ArylideYellow": "#e9d66b", "BabyPink": "#f4c2c2",
-                "BananaMania": "#fae7b5", "CadmiumRed": "#e30022"}
+                "BananaMania": "#fae7b5", "CadmiumRed": "#e30022", "Lol": "420"}
 
-colour = input("Enter a colour: ")
-# colour = "armygreen"
+colour = input("Enter a colour: ").casefold()
 while colour != "":
     try:
         for colour_name in COLOUR_CODES.keys():
-            # print(item.casefold())
             if colour == colour_name.casefold():
                 colour = colour_name
         print(COLOUR_CODES[colour])
     except KeyError:
         print(f"'{colour}' not found!")
-    colour = input("Enter a colour: ")
+    colour = input("Enter a colour: ").casefold()
