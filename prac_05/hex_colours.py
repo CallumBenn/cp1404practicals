@@ -9,9 +9,14 @@ COLOUR_CODES = {"AbsoluteZero": "#0048ba", "AcidGreen": "#b0bf1a", "AliceBlue": 
                 "BananaMania": "#fae7b5", "CadmiumRed": "#e30022"}
 
 colour = input("Enter a colour: ")
+# colour = "armygreen"
 while colour != "":
     try:
+        for colour_name in COLOUR_CODES.keys():
+            # print(item.casefold())
+            if colour == colour_name.casefold():
+                colour = colour_name
         print(COLOUR_CODES[colour])
     except KeyError:
-        print("Colour not found!")
+        print(f"'{colour}' not found!")
     colour = input("Enter a colour: ")
