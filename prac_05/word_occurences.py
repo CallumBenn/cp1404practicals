@@ -4,13 +4,13 @@ Callum Bennett
 
 Word Occurences
 Estimate: 30 minutes
-Actual: xx minutes
+Actual: 52 minutes
 """
 from shlex import split
 
-
-text = "this is a collection of words of nice words this is a fun thing it is"
+text = input("Text: ")
 words_to_count = {}
+longest_length = 0
 
 for word in text.split():
     try:
@@ -18,10 +18,12 @@ for word in text.split():
     except KeyError:
         words_to_count[word] = 1
 
-
+for word in words_to_count.keys():
+    if len(word) > longest_length:
+        longest_length = len(word)
 
 for word in sorted(words_to_count):
-    print(word, ":", words_to_count[word])
+    print(f"{word:{longest_length}} : {words_to_count[word]}")
 
 
 
