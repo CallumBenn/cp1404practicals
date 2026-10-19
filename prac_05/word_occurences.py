@@ -9,7 +9,7 @@ Actual: xx minutes
 from shlex import split
 
 
-text = "This is a test. test This is a. Test Is A."
+text = "this is a collection of words of nice words this is a fun thing it is"
 words_to_count = {}
 
 for word in text.split():
@@ -17,7 +17,12 @@ for word in text.split():
         words_to_count[word] += 1
     except KeyError:
         words_to_count[word] = 1
-print(words_to_count)
+
+
+
+for word in sorted(words_to_count):
+    print(word, ":", words_to_count[word])
+
 
 
 
