@@ -4,40 +4,42 @@ Callum Bennett
 
 Emails
 Estimate: 40 minutes
-Actual: 70 minutes
+Actual: 80 minutes
 """
 from typing import Any
 
 
 def main():
-    emails_and_names = {}
+    """Get and store names and email addresses in dictionary, then print contents of dictionary"""
+    email_to_name = {}
     email = input("Email: ")
-    emails_and_names[email] = determine_name(email)
+    email_to_name[email] = remove_symbols(email)
 
-    choice = input(f"Is your name {emails_and_names[email]}? (Y/n) ").upper()
+    choice = input(f"Is your name {email_to_name[email]}? (Y/n) ").upper()
     while choice == "Y" or choice == "":
         email = input("Email: ")
-        emails_and_names[email] = determine_name(email)
-        choice = input(f"Is your name {emails_and_names[email]}? (Y/n) ").upper()
+        email_to_name[email] = remove_symbols(email)
+        choice = input(f"Is your name {email_to_name[email]}? (Y/n) ").upper()
 
     name = input("Name: ")
     if name != "":
-        emails_and_names[email] = determine_name(name)
+        email_to_name[email] = remove_symbols(name)
     email = input("Email: ")
     if email != "":
-        emails_and_names[email] = determine_name(name)
-    print_emails(emails_and_names)
+        email_to_name[email] = remove_symbols(name)
+    print_items(email_to_name)
 
 
-def determine_name(item):
-    name = " ".join(item.split("@", 1)[0].split(".")).title()
+def remove_symbols(string):
+    """Remove '@' and '.' from string"""
+    name = " ".join(string.split("@", 1)[0].split(".")).title()
     return name
 
 
-def print_emails(emails):
-    for i in emails:
-        print(f"{emails[i]} ({i})")
-
+def print_items(items):
+    """Print each key and its item in a dictionary"""
+    for i in items:
+        print(f"{items[i]} ({i})")
 
 
 main()
