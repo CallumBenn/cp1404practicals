@@ -4,7 +4,7 @@ Callum Bennett
 
 Wimbledon
 Estimate: 50 minutes
-Actual: 80 minutes
+Actual: 82 minutes
 """
 from cmath import exp
 
@@ -50,7 +50,7 @@ def print_winning_countries(countries):
     for country in countries:
         number_of_countries += 1
     print(f"These {number_of_countries} countries have won Wimbledon:")
-    print(", ".join(countries))
+    print(", ".join(sorted(countries)))
 
 
 main()
