@@ -12,7 +12,10 @@ from cmath import exp
 
 filename = "wimbledon.csv"
 champions = []
+winning_countries = {}
 times_won = {}
+
+
 
 with open(filename, "r", encoding="utf-8-sig") as in_file:
     # file = csv.reader(in_file)
@@ -20,6 +23,7 @@ with open(filename, "r", encoding="utf-8-sig") as in_file:
     for line in in_file:
         parts = line.split(',')
         champions.append(parts[2])
+        winning_countries[parts[3]] = parts[3]
         # print(parts[2])
 # print(champions)
 
@@ -32,5 +36,16 @@ try:
         times_won[name] += 1
 except KeyError:
     print("Invalid name")
-print(times_won)
-    # champions_and_scores =
+
+
+print("Wimbledon Champions:")
+for name in times_won:
+    print(name, times_won[name])
+
+number_of_countries = 0
+for country in winning_countries:
+    number_of_countries += 1
+print(f"\nThese {number_of_countries} countries have won Wimbledon:")
+# for country in winning_countries:
+#     print(", ".join(country.strip(",")))
+print(", ".join(winning_countries))
