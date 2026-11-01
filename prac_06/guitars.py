@@ -12,12 +12,13 @@ from prac_06.guitar import Guitar
 
 def main():
     print("My guitars!")
-    list_of_guitars = []
-
-    guitar = get_guitar()
-    while guitar != "blank":
-        list_of_guitars.append(guitar)
-        guitar = get_guitar()
+    list_of_guitars = [["Gibson L-5 CES", 1922, 16035.40], ["Line 6 JTV-59", 2010, 1512.9]]
+    # list_of_guitars = []
+    # guitar = get_guitar()
+    # while guitar != "blank":
+    #     list_of_guitars.append(guitar)
+    #     guitar = get_guitar()
+    display_guitars(list_of_guitars)
 
 
 def get_guitar():
@@ -32,13 +33,15 @@ def get_guitar():
     if cost == None:
         return "blank"
     guitars += name, year, cost
+    print(f"{name} ({year}) : ${cost:.2f} added.")
     return guitars
 
 
-
-
-
-
+def display_guitars(guitars):
+    for i, guitar in enumerate(guitars, 1):
+        guitar_details = Guitar(guitar[0], guitar[1], guitar[2])
+        vintage_string = "(vintage)" if guitar_details.is_vintage() >= True else ""
+        print(f"Guitar {i}: {guitar_details.name:>20} ({guitar_details.year}), worth ${guitar_details.cost:10,.2f} {vintage_string}")
 
 
 def get_valid_string(instruction):
