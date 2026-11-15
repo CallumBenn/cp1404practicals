@@ -3,7 +3,7 @@ CP1404/CP5632 - Practical 07
 Callum Bennett
 
 Estimate: 35 minutes
-Actual: 30 minutes
+Actual: 60 minutes
 """
 
 from typing import Any
@@ -12,16 +12,28 @@ from guitar import Guitar
 
 def main():
     """Read file of guitar details, save as objects, display."""
-    in_file = open('guitars.csv', 'r')
+    in_file = import_file('guitars.csv')
     guitars = format_from_csv(in_file)
-
     new_guitars = get_guitar()
-    guitars = append_to_guitars(guitars, new_guitars)
-    in_file.close()
+    append_file('guitars.csv', new_guitars)
+    new_guitars = format_from_list(new_guitars)
+    guitars = append_guitars(guitars, new_guitars)
     display_list(guitars)
+    in_file.close()
 
 
-def append_to_guitars(guitars, new_guitars):
+def import_file(filename):
+    file = open(filename, 'r')
+    return file
+
+def append_file(filename, data):
+    file = open(filename, 'a')
+    for line in data:
+        item = ",".join(str(i) for i in line)
+        print(item, file=file)
+
+
+def append_guitars(guitars, new_guitars):
     """Append new guitars to list of guitars, then sort list."""
     for guitar in new_guitars:
         guitars.append(guitar)
@@ -29,11 +41,10 @@ def append_to_guitars(guitars, new_guitars):
     return guitars
 
 
-
-def display_list(item):
+def display_list(data):
     """Print items in list."""
-    for guitar in item:
-        print(guitar)
+    for line in data:
+        print(line)
 
 
 def get_guitar():
@@ -53,7 +64,6 @@ def get_guitar():
     if guitars == []:
         return None
     else:
-        guitars = format_from_list(guitars)
         return guitars
 
 
