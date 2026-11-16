@@ -15,9 +15,11 @@ def main():
     in_file = import_file('guitars.csv')
     guitars = format_from_csv(in_file)
     new_guitars = get_guitar()
-    append_file('guitars.csv', new_guitars)
-    new_guitars = format_from_list(new_guitars)
-    guitars = append_guitars(guitars, new_guitars)
+    # Admittedly, this is a messy fix for a case wherein the very first user input being blank causes a TypeError. I did this because I suck at time management
+    if new_guitars != None:
+        append_file('guitars.csv', new_guitars)
+        new_guitars = format_from_list(new_guitars)
+        guitars = append_guitars(guitars, new_guitars)
     display_list(guitars)
     in_file.close()
 
