@@ -12,13 +12,12 @@ from project import Project
 from operator import itemgetter
 
 MENU_CHOICES = "- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n - (F)ilter projects by date\n- (A)dd new project\n- (U)pdate project\n- (Q)uit\n"
-# PROJECT_DETAILS = f"{line[0]}, start: {line[1]}, priority {line[2]}, estimate: ${float(line[3]):.2f}, completion: {line[4]}%"
-
+FILENAME = 'projects.txt'
 
 def main():
     print("Welcome to Pythonic Project Management")
-    in_file = open('projects.txt', 'r')
-    default_file = load_project('in_file.py')
+    in_file = open(FILENAME, 'r')
+    default_file = load_project(in_file)
     get_choice(default_file)
     in_file.close()
 
@@ -29,7 +28,8 @@ def get_choice(file):
         if choice == "L":
             new_file_name = get_valid_file("Enter file name (leave blank to cancel): ")
             if new_file_name != "":
-                file.append(load_project(new_file_name))
+                new_file = open(new_file_name, 'r')
+                file.append(load_project(new_file))
         elif choice == "S":
             save_project(file)
         elif choice == "D":
@@ -39,7 +39,9 @@ def get_choice(file):
         elif choice == "A":
             file.append(add_project())
         elif choice == "U":
-            file = update_project(file)
+            updated_file = update_project(file)
+            if updated_file != None:
+                file = updated_file
         else:
             print("Invalid choice.")
         choice = input(f"{MENU_CHOICES}\n>>> ").upper()
@@ -62,9 +64,12 @@ def get_valid_file(instruction):
 def load_project(file):
     """Load and return projects from file."""
     projects = []
+    file.readline()  # Ignore header
     for line in file:
-        parts = line.strip().split(',')
+        parts = line.strip().split('	')
+        # print(parts) # Debugging
         project = Project(parts[0], parts[1], parts[2], parts[3], parts[4])
+        # print(project) # Debugging
         projects.append(project)
     print(f"Loaded {len(projects)} projects from {file}")
     return projects
@@ -94,8 +99,6 @@ def display_project(file):
     print("Complete projects: ")
     for item in complete_projects:
         print(item)
-            # print(f"{line.name}, start: {line.start_date}, priority {line.priority}, estimate: ${float(line.cost_estimate):.2f}, completion: {line.completion_percentage}%")
-            # print(f"{line[0]}, start: {line[1]}, priority {line[2]}, estimate: ${float(line[3]):.2f}, completion: {line[4]}%")
 
 
 def filter_project(file):
@@ -121,21 +124,23 @@ def add_project():
 
 def update_project(file):
     """Modify project's completion % and/or priority."""
-    project_id = 0
-    for project in file:
-        print(project_id, project)
-        project_id += 1
-    choice = int(input("Project choice"))
+    for number, project in enumerate(file):
+        print(number, project)
+    choice = int(input("Project choice: ")) 
     chosen_project = file[choice]
     print(chosen_project)
     try:
         percentage =  int(input("New Percentage: "))
-        chosen_project[4] = percentage
+        chosen_project.completion_percentage = percentage
+        # print(chosen_project)   # Debugging
         priority = int(input("New Priority: "))
-        chosen_project[2] = priority
+        chosen_project.priority = priority
+        # print(chosen_project)  # Debugging
     except ValueError:
         return None
     file[choice] = chosen_project
+    # for project in file:    # Debugging
+    #     print(project) # Debugging
     return file
 
 
