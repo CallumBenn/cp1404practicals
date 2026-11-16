@@ -18,9 +18,6 @@ class Project:
                 self.cost_estimate = cost_estimate
                 self.completion_percentage = completion_percentage
 
-        def is_complete(self):
-                return self.completion_percentage >= 100
-
 
         def __lt__(self, other):
                 return self.start_date < other.start_date
