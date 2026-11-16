@@ -11,7 +11,7 @@ from xml.sax.handler import property_interning_dict
 from project import Project
 from operator import itemgetter
 
-MENU_CHOICES = "- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n - (F)ilter projects by date\n- (A)dd new project\n- (U)pdate project\n- (Q)uit\n"
+MENU_CHOICES = "- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date\n- (A)dd new project\n- (U)pdate project\n- (Q)uit\n"
 FILENAME = 'projects.txt'
 
 def main():
@@ -88,10 +88,11 @@ def display_project(file):
     """Display incomplete and complete projects sorted by priority."""
     incomplete_projects = []
     complete_projects = []
-    for project in sorted(file, key=itemgetter(file.priority)):
-        if not file.is_complete():
+    for project in file:
+        # print(project.completion_percentage) # Debugging
+        if int(project.completion_percentage) < 100:
             incomplete_projects.append(project)
-        if file.is_complete():
+        else:
             complete_projects.append(project)
     print("Incomplete projects: ")
     for item in incomplete_projects:
@@ -126,7 +127,7 @@ def update_project(file):
     """Modify project's completion % and/or priority."""
     for number, project in enumerate(file):
         print(number, project)
-    choice = int(input("Project choice: ")) 
+    choice = int(input("Project choice: "))
     chosen_project = file[choice]
     print(chosen_project)
     try:
