@@ -3,9 +3,8 @@ CP1404/CP5632 - Practical 07
 Callum Bennett
 
 Estimate: 70 minutes
-Actual: xx minutes
+Actual: 190 minutes
 """
-
 
 import datetime
 
@@ -18,10 +17,11 @@ class Project:
                 self.cost_estimate = cost_estimate
                 self.completion_percentage = completion_percentage
 
+        def is_complete(self):
+                return self.completion_percentage == 100
 
         def __lt__(self, other):
                 return self.start_date < other.start_date
-
 
         def __str__(self):
                 return f"{self.name}, start: {self.start_date}, priority {self.priority}, estimate: ${float(self.cost_estimate):.2f}, completion: {self.completion_percentage}%"
