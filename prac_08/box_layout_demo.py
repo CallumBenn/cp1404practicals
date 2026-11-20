@@ -1,3 +1,8 @@
+"""
+CP1404/CP5632 - Practical 08
+Callum Bennett
+"""
+
 from kivy.app import App
 from kivy.lang import Builder
 
